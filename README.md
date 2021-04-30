@@ -18,6 +18,23 @@ It is also the official code release of [`[PointRCNN]`](https://arxiv.org/abs/18
 
 
 ## Changelog
+[2021-04-30] **NEW:** 增加[`PointPillar-MultiHead`的onnx文件转换工具](/tools/onnx_tuils)).在按照[Installation](docs/INSTALL.md)安装之后，按照一下步骤即可完成转换
+
+    1. 下载[PointPillar-MultiHead](tools/cfgs/nuscenes_models/cbgs_pp_multihead.yaml) 相对应的权重文件[model-23M](https://drive.google.com/file/d/1p-501mTWsq0G9RzroTWSXreIMyTUUpBM/view?usp=sharing) 
+
+
+    2. 分别配置[trans_pfe.py](tools/onnx_utils/trans_pfe.py)和[trans_backbone_multihead.py](tools/onnx_utils/trans_backbone_multihead.py)的相关路径
+
+    3. 分别运行两个文件
+
+        ```bash
+        cd tools/onnx_utils
+        python trans_pfe.py
+        python trans_backbone_multihead.py
+        ```
+
+
+
 [2020-11-27] **Bugfixed:** Please re-prepare the validation infos of Waymo dataset (version 1.2) if you would like to 
 use our provided Waymo evaluation tool (see [PR](https://github.com/open-mmlab/OpenPCDet/pull/383)). 
 Note that you do not need to re-prepare the training data and ground-truth database. 

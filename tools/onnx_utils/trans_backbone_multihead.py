@@ -50,12 +50,12 @@ def build_backbone_multihead(ckpt , cfg ):
 if __name__ == "__main__":
     import numpy as np 
     from pcdet.config import cfg, cfg_from_yaml_file
-    cfg_file = '/path/to/cbgs_pp_multihead.yaml'
-    filename_mh = "/path/to/pp_multihead_nds5823_updated.pth"
+    cfg_file = '../../../PointPillars/pointpillars/cfgs/cbgs_pp_multihead.yaml'
+    filename_mh = "../../../model/pp_multihead_nds5823_updated.pth"
     cfg_from_yaml_file(cfg_file, cfg)
     model , dummy_input = build_backbone_multihead(filename_mh , cfg )
 
-    export_onnx_file = "/path/to/cbgs_pp_multihead_backbone.onnx"
+    export_onnx_file = "../../../model/cbgs_pp_multihead_backbone.onnx"
     model.eval().cuda()
     torch.onnx.export(model,
                       dummy_input,

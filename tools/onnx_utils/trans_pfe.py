@@ -3,6 +3,7 @@ import argparse
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import spconv.pytorch as spconv
 from pcdet.config import cfg, cfg_from_yaml_file
 from pcdet.models.backbones_3d.vfe.vfe_template import VFETemplate
 
@@ -98,13 +99,13 @@ def build_pfe(ckpt,cfg):
 
 if __name__ == "__main__":
     from pcdet.config import cfg, cfg_from_yaml_file
-    cfg_file = '../../../PointPillars/pointpillars/cfgs/cbgs_pp_multihead.yaml'
-    filename_mh = "../../../model/pp_multihead_nds5823_updated.pth"
+    cfg_file = '../../../config/cbgs_pp_multihead.yaml'
+    filename_mh = "../../../OpenPCDet/output/app/config/cbgs_pp_multihead/default/ckpt/checkpoint_epoch_3.pth"
     cfg_from_yaml_file(cfg_file, cfg)
     model_cfg=cfg.MODEL
     pfe , dummy_input  = build_pfe( filename_mh, cfg)
     pfe.eval().cuda()
-    export_onnx_file = "../../../model/cbgs_pp_multihead_pfe.onnx"
+    export_onnx_file = "../../../config/cbgs_pp_multihead_pfe.onnx"
     torch.onnx.export(pfe,
                     dummy_input,
                     export_onnx_file,
